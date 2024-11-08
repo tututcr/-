@@ -188,7 +188,7 @@ ul {
 /* 分数显示和重新开始 */
 #score-container {
     text-align: center;
-    font-size: 20px;
+    font-size: 40px;
     position: absolute;
     top: 700px; /* 固定位置 */
     left: 50%;
@@ -200,14 +200,14 @@ ul {
 }
 
 #restart {
-    margin-top: 20px;
+    margin-top: 80px;
     padding: 10px 20px;
     background: #2ecc71;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 115px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 36px;
     transition: background 0.3s;
 }
 
