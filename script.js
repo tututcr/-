@@ -4,6 +4,7 @@ let currentQuiz = 0;
 let score = 0;
 let timer;
 let timeLeft = 300; // 倒计时，从300秒开始
+let isPaused = false; // 游戏是否暂停
 
 // DOM元素
 const quiz = document.getElementById('quiz');
@@ -11,7 +12,6 @@ const answerButtons = document.querySelectorAll('.answer-btn');
 const questionEl = document.getElementById('question');
 const scoreEl = document.getElementById('score');
 const timerEl = document.getElementById('timer');
-const leaderboardList = document.getElementById('leaderboard-list');
 const scoreContainer = document.getElementById('score-container');
 const finalScoreEl = document.getElementById('final-score');
 const restartBtn = document.getElementById('restart');
@@ -19,9 +19,9 @@ const birdImageContainer = document.getElementById('bird-image-container');
 const birdImage = document.getElementById('bird-image');
 const nextButtonContainer = document.getElementById('next-button-container');
 const nextQuestionBtn = document.getElementById('next-question');
-const leaderboardBtn = document.getElementById('leaderboard-btn');
-const leaderboardContainer = document.getElementById('leaderboard-container');
-const clearLeaderboardBtn = document.getElementById('clear-leaderboard-btn');
+const startBtn = document.getElementById('start-btn');
+const pauseBtn = document.getElementById('pause-btn');
+const endBtn = document.getElementById('end-btn');
 
 // 加载鸟类游戏文本文件
 fetch('鸟类游戏.txt')
@@ -31,8 +31,7 @@ fetch('鸟类游戏.txt')
         generateQuizQuestions(quizData);
         shuffleArray(questions);
         loadQuiz();
-        startTimer();
-        loadLeaderboard(); // 初次加载排行榜时它是隐藏的
+        hideAllButtons(); // 隐藏除开始按钮以外的按钮
     })
     .catch(error => console.error('加载题库时出错:', error));
 
@@ -89,6 +88,7 @@ function loadQuiz() {
 // 处理答案选择
 answerButtons.forEach(button => {
     button.addEventListener('click', () => {
+        if (isPaused) return; // 如果游戏被暂停，不允许答题
         const selected = button.innerText;
         const currentData = questions[currentQuiz];
         if (selected === currentData.correct) {
@@ -124,6 +124,7 @@ nextQuestionBtn.addEventListener('click', () => {
 // 计时器
 function startTimer() {
     timer = setInterval(() => {
+        if (isPaused) return; // 如果游戏暂停，计时器停止
         timeLeft--;
         updateTimer();
         if (timeLeft <= 0) {
@@ -146,8 +147,6 @@ function endQuiz() {
     document.querySelector('ul').classList.add('hide');
     scoreContainer.classList.remove('hide');
     finalScoreEl.innerText = score;
-    updateLeaderboard(score);
-    loadLeaderboard();
 }
 
 // 重新开始游戏
@@ -164,40 +163,41 @@ restartBtn.addEventListener('click', () => {
     startTimer();
 });
 
-// 更新排行榜
-function updateLeaderboard(newScore) {
-    let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-    const timestamp = new Date().toLocaleString();
-    leaderboard.push({ score: newScore, time: timestamp });
-    // 按分数降序排序
-    leaderboard.sort((a, b) => b.score - a.score);
-    // 保留前10名
-    leaderboard = leaderboard.slice(0, 10);
-    localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
-}
-
-// 加载排行榜
-function loadLeaderboard() {
-    leaderboardList.innerHTML = '';
-    let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-    leaderboard.forEach(entry => {
-        const li = document.createElement('li');
-        li.textContent = `${entry.score}分 - ${entry.time}`;
-        leaderboardList.appendChild(li);
-    });
-}
-
-// 显示排行榜
-leaderboardBtn.addEventListener('click', () => {
-    leaderboardContainer.style.display = 'block';  // 显示排行榜容器
+// 启动游戏
+startBtn.addEventListener('click', () => {
+    startBtn.classList.add('hide'); // 隐藏开始按钮
+    loadQuiz(); // 开始加载题目
+    startTimer(); // 启动计时器
+    showAllButtons(); // 显示其他控制按钮
 });
 
-// 清空排行榜
-clearLeaderboardBtn.addEventListener('click', () => {
-    localStorage.removeItem('leaderboard');
-    loadLeaderboard(); // 清空后重新加载排行榜
-    leaderboardContainer.style.display = 'none'; // 隐藏排行榜
+// 暂停游戏
+pauseBtn.addEventListener('click', () => {
+    isPaused = true;
+    pauseBtn.classList.add('hide');
+    startBtn.classList.remove('hide');
 });
+
+// 结束游戏
+endBtn.addEventListener('click', () => {
+    endQuiz();
+    hideAllButtons(); // 隐藏所有按钮
+    startBtn.classList.remove('hide'); // 重新显示开始按钮
+});
+
+// 隐藏所有控制按钮
+function hideAllButtons() {
+    pauseBtn.classList.add('hide');
+    endBtn.classList.add('hide');
+    nextButtonContainer.classList.add('hide');
+}
+
+// 显示所有控制按钮
+function showAllButtons() {
+    pauseBtn.classList.remove('hide');
+    endBtn.classList.remove('hide');
+    nextButtonContainer.classList.remove('hide');
+}
 
 // 初始化分数和计时器显示
 scoreEl.innerText = `${score}`;
