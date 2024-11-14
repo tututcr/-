@@ -25,7 +25,7 @@ body {
     position: relative; /* 为绝对定位子元素提供参考 */
     overflow-y: auto;
 }
-/* 居中显示开始答题按钮 */
+/* 开始按钮容器居中 */
 #start-button-container {
     position: absolute;
     top: 50%;
@@ -34,15 +34,20 @@ body {
     text-align: center;
 }
 
+/* 开始按钮 */
 #start-btn {
-    padding: 20px 40px;
-    font-size: 20px;
-    background-color: #3498db;
-    color: white;
     border: none;
+    background: none;
     cursor: pointer;
-    border-radius: 5px;
+    padding: 0;
 }
+
+/* 确保图片大小合适 */
+#start-image {
+    width: 200px; /* 根据需要调整宽度 */
+    height: auto; /* 保持图片比例 */
+}
+
 
 /* 其他游戏内容 */
 #quiz {
