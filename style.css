@@ -26,6 +26,74 @@ body {
     overflow-y: auto;
 }
 
+/* 按钮 */
+button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 10px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+/* 控制按钮位置 */
+#start-btn {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#pause-btn {
+    position: absolute;
+    top: 20px;
+    left: 10%;
+    transform: translateX(-50%);
+}
+
+#end-btn {
+    position: absolute;
+    top: 20px;
+    left: 90%;
+    transform: translateX(-50%);
+}
+
+/* 分数和计时器 */
+#score-container {
+    text-align: center;
+    font-size: 40px;
+    position: absolute;
+    top: 700px; /* 固定位置 */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#score-container p {
+    margin: 10px 0;
+}
+
+#score-container .hide {
+    display: none;
+}
+
+/* 隐藏的控制按钮 */
+.hide {
+    display: none;
+}
+
+
 /* 顶部信息栏 */
 .top-bar {
     display: flex;
@@ -56,81 +124,7 @@ body {
     color: #097536;
 }
 
-#leaderboard-btn {
-    position: absolute;
-    top: 100px;
-    right: 200px;
-    padding: 10px 20px;
-    background: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
 
-#leaderboard-btn:hover {
-    background: #c0392b;
-}
-
-/* 排行榜容器 */
-#leaderboard-container {
-    position: fixed;
-    top: 10%;
-    right: 10px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    display: none; /* 默认隐藏 */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    z-index: 9999;
-    width: 250px;
-    max-height: 300px;
-    overflow-y: auto;
-    text-align: center;
-}
-
-/* 清空排行榜按钮 */
-#clear-leaderboard-btn {
-    background-color: red;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    border: none;
-}
-
-#clear-leaderboard-btn:hover {
-    background-color: darkred;
-}
-
-/* 排行榜列表样式 */
-#leaderboard-list {
-    list-style-type: decimal;
-    padding-left: 20px;
-    max-height: 150px;
-    overflow-y: auto;
-    font-size: 14px;
-}
-
-/* 排行榜按钮 */
-#leaderboard-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 10px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#leaderboard-btn:hover {
-    background-color: #2980b9;
-}
 
 
 /* 问题区域 */
