@@ -19,6 +19,9 @@ const birdImageContainer = document.getElementById('bird-image-container');
 const birdImage = document.getElementById('bird-image');
 const nextButtonContainer = document.getElementById('next-button-container');
 const nextQuestionBtn = document.getElementById('next-question');
+const leaderboardBtn = document.getElementById('leaderboard-btn'); // 排行榜按钮
+const leaderboardContainer = document.getElementById('leaderboard-container'); // 排行榜容器
+const clearLeaderboardBtn = document.getElementById('clear-leaderboard-btn'); // 清空排行榜按钮
 
 // 加载鸟类游戏文本文件
 fetch('鸟类游戏.txt')
@@ -29,7 +32,6 @@ fetch('鸟类游戏.txt')
         shuffleArray(questions);
         loadQuiz();
         startTimer();
-        loadLeaderboard();
     })
     .catch(error => console.error('加载题库时出错:', error));
 
@@ -58,8 +60,8 @@ function generateQuizQuestions(birds) {
 
 // 打乱数组顺序
 function shuffleArray(array) {
-    for (let i = array.length -1; i >0; i--){
-        const j = Math.floor(Math.random()*(i+1));
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
@@ -144,7 +146,6 @@ function endQuiz() {
     scoreContainer.classList.remove('hide');
     finalScoreEl.innerText = score;
     updateLeaderboard(score);
-    loadLeaderboard();
 }
 
 // 重新开始游戏
@@ -183,6 +184,18 @@ function loadLeaderboard() {
         leaderboardList.appendChild(li);
     });
 }
+
+// 显示排行榜
+leaderboardBtn.addEventListener('click', () => {
+    leaderboardContainer.classList.remove('hide'); // 显示排行榜
+    loadLeaderboard();
+});
+
+// 清空排行榜
+clearLeaderboardBtn.addEventListener('click', () => {
+    localStorage.removeItem('leaderboard');
+    leaderboardList.innerHTML = ''; // 清空列表
+});
 
 // 初始化分数和计时器显示
 scoreEl.innerText = `${score}`;
