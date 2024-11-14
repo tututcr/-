@@ -108,7 +108,7 @@ button:disabled {
 
 #timer {
     position: absolute;
-    top: 80px;
+    top: 100px;
     left: 150px;
     font-size: 50px;
     font-weight: bold;
@@ -117,7 +117,7 @@ button:disabled {
 
 #score {
     position: absolute;
-    top: 80px;
+    top: 100px;
     left: 510px;
     font-size: 50px;
     font-weight: bold;
@@ -149,8 +149,8 @@ ul {
     margin: 0;
     position: absolute;
     top: 450px; /* 调整至问题下方 */
-    left: -560px;
-    right: 220px;
+    left: 60px;
+    right: 60px;
     height: 320px; /* 设置容器高度以容纳所有按钮 */
 }
 
