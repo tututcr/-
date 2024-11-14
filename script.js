@@ -30,7 +30,6 @@ fetch('鸟类游戏.txt')
         quizData = data;
         generateQuizQuestions(quizData);
         shuffleArray(questions);
-        loadQuiz();
         hideAllButtons(); // 隐藏除开始按钮以外的按钮
     })
     .catch(error => console.error('加载题库时出错:', error));
@@ -166,6 +165,7 @@ restartBtn.addEventListener('click', () => {
 // 启动游戏
 startBtn.addEventListener('click', () => {
     startBtn.classList.add('hide'); // 隐藏开始按钮
+    quiz.classList.remove('hide'); // 显示游戏内容
     loadQuiz(); // 开始加载题目
     startTimer(); // 启动计时器
     showAllButtons(); // 显示其他控制按钮
@@ -175,7 +175,7 @@ startBtn.addEventListener('click', () => {
 pauseBtn.addEventListener('click', () => {
     isPaused = true;
     pauseBtn.classList.add('hide');
-    startBtn.classList.remove('hide');
+    startBtn.classList.remove('hide'); // 在暂停时重新显示开始按钮
 });
 
 // 结束游戏
