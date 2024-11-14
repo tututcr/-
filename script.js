@@ -32,7 +32,7 @@ fetch('鸟类游戏.txt')
         shuffleArray(questions);
         loadQuiz();
         startTimer();
-        loadLeaderboard();
+        loadLeaderboard(); // 初次加载排行榜时它是隐藏的
     })
     .catch(error => console.error('加载题库时出错:', error));
 
@@ -189,7 +189,7 @@ function loadLeaderboard() {
 
 // 显示排行榜
 leaderboardBtn.addEventListener('click', () => {
-    leaderboardContainer.style.display = 'block';
+    leaderboardContainer.style.display = 'block';  // 显示排行榜容器
 });
 
 // 清空排行榜
