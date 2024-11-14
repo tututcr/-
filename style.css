@@ -25,7 +25,48 @@ body {
     position: relative; /* 为绝对定位子元素提供参考 */
     overflow-y: auto;
 }
+/* 居中显示开始答题按钮 */
+#start-button-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
 
+#start-btn {
+    padding: 20px 40px;
+    font-size: 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* 其他游戏内容 */
+#quiz {
+    display: none;
+    text-align: center;
+}
+
+.hide {
+    display: none;
+}
+
+.answer-btn {
+    background-color: #3498db;
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.answer-btn:disabled {
+    background-color: #dcdcdc;
+}
 /* 按钮 */
 button {
     padding: 10px 20px;
